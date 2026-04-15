@@ -1,0 +1,10 @@
+{
+  "name": "lightweight-rednote-scraper",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Lightweight mobile-first RedNote/Xiaohongshu scraper for public posts.",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "dev": "node dev-server.mjs"
+  }
+}
