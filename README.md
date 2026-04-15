@@ -2,7 +2,7 @@
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-181717?logo=github)](https://github.com/hanco1/LightweightRedNoteScraper)
 [![Issues](https://img.shields.io/github/issues/hanco1/LightweightRedNoteScraper?color=2ea44f&label=Issues)](https://github.com/hanco1/LightweightRedNoteScraper/issues)
-[![Vercel Live](https://img.shields.io/badge/Live-Vercel-000000?logo=vercel)](https://vercel-iphone-mvp.vercel.app)
+[![Vercel Live](https://img.shields.io/badge/Live-Vercel-000000?logo=vercel)]([https://vercel-iphone-mvp.vercel.app](https://vercel-lightweightrednotescraper.vercel.app/))
 [![Docs](https://img.shields.io/badge/Docs-User%20Flow%20%26%20Architecture-6f42c1)](./docs)
 
 [Run locally](#run-locally) · [Live app](https://vercel-iphone-mvp.vercel.app) · [Chinese README](./README.zh-CN.md) · [User flow](./docs/user-flow.md) · [Architecture](./docs/architecture.md)
