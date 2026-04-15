@@ -11,11 +11,11 @@ A lightweight, mobile-first RedNote/Xiaohongshu scraper for public posts. Paste 
 
 ## Preview
 
-### Chinese mobile view
+### English mobile view
 
 ![Chinese mobile preview](./docs/images/mobile-home-zh.png)
 
-### English mobile view
+### Chinese mobile view
 
 ![English mobile preview](./docs/images/mobile-home-en.png)
 
