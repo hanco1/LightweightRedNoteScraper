@@ -1,17 +1,10 @@
 # Architecture
 
-## Overview
-
-This project is a lightweight, stateless RedNote/Xiaohongshu scraper for public posts.
-
-It is designed around one mobile page and two serverless endpoints:
-
-- `POST /api/capture`
-- `GET /api/media`
+This project is a mobile-first public RedNote/Xiaohongshu scraper. It is intentionally stateless: users paste one public link, the app captures it once, and the server keeps no history.
 
 ## Runtime pieces
 
-### 1. Mobile frontend
+### Mobile frontend
 
 Files:
 
@@ -23,12 +16,12 @@ Files:
 Responsibilities:
 
 - render the mobile UI
-- handle Chinese / English language switching
-- submit one public link
+- handle English and Chinese copy
+- submit one public link or share text
 - render the normalized response
-- trigger one-by-one save or save-all actions
+- expose preview, save-one, and save-all actions
 
-### 2. Capture API
+### Capture API
 
 File:
 
@@ -36,12 +29,12 @@ File:
 
 Responsibilities:
 
-- validate the incoming request
-- extract the public Xiaohongshu URL from raw share text
-- call the capture pipeline in `lib/xhs.js`
-- return a normalized JSON payload
+- accept `POST` requests
+- read the pasted input
+- call `fetchCaptureFromPublicLink`
+- return a normalized JSON payload or a clear error response
 
-### 3. Parsing and normalization
+### Parsing and normalization
 
 File:
 
@@ -49,14 +42,14 @@ File:
 
 Responsibilities:
 
-- resolve the public post URL
-- fetch the public HTML page
-- extract `window.__INITIAL_STATE__`
-- parse the note payload safely
-- normalize title, caption, tags, interactions, publish time, IP location, and media
-- convert raw media URLs into proxyable same-origin URLs
+- extract the first public Xiaohongshu/RedNote URL from pasted text
+- fetch the public page with browser-like headers
+- parse `window.__INITIAL_STATE__` safely
+- normalize title, caption, tags, author, publish time, IP location, interactions, and media
+- convert upstream media URLs into same-origin proxy URLs
+- allow only trusted Xiaohongshu/XHS media hosts through the proxy layer
 
-### 4. Media proxy
+### Media proxy
 
 File:
 
@@ -64,12 +57,13 @@ File:
 
 Responsibilities:
 
-- proxy images and videos through the same origin
-- support preview and download flows
-- forward range requests for media playback
-- improve compatibility for iPhone and Safari
+- serve `GET` and `HEAD` requests
+- validate the target URL
+- forward `Range` requests for playback
+- stream upstream media through the same origin
+- keep image and video previewing compatible with mobile browsers
 
-### 5. Local development
+### Local development
 
 File:
 
@@ -77,25 +71,25 @@ File:
 
 Responsibilities:
 
-- serve the same frontend files locally
+- serve the same frontend locally
 - route `/api/capture` and `/api/media`
-- provide a fast local loop before deploying to Vercel
+- keep the development loop close to production behavior
 
 ## Data flow
 
-1. User pastes a public link.
-2. Frontend posts the input to `POST /api/capture`.
-3. `api/capture.js` calls `fetchCaptureFromPublicLink`.
-4. `lib/xhs.js` fetches the public page and parses the note state.
-5. The normalized payload is returned to the page.
+1. The user pastes a public link or share text.
+2. The frontend sends the value to `POST /api/capture`.
+3. `api/capture.js` validates the request and calls `fetchCaptureFromPublicLink`.
+4. `lib/xhs.js` extracts the public URL, fetches the public page, and parses the embedded note state.
+5. The capture pipeline returns normalized JSON with title, description, tags, author, publish time, IP location, interactions, source URL, note type, and media items.
 6. The page renders metadata and media cards.
-7. Media preview and save actions use `/api/media?url=...`.
+7. Previews and downloads go through `/api/media?url=...` so media stays same-origin.
 
-## Why the system stays fast
+## Design constraints
 
 - No database
 - No login flow
 - No server-side history
 - No background jobs
-- One capture request per page interaction
-- Same-origin media proxy only when needed
+- One capture request per interaction
+- Same-origin media proxy only when media needs to be shown or saved

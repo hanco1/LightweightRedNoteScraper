@@ -1,52 +1,72 @@
-<mxfile host="app.diagrams.net" modified="2026-04-14T23:00:00.000Z" agent="Codex" version="24.7.17">
+<mxfile host="app.diagrams.net" modified="2026-04-15T00:00:00.000Z" agent="Codex" version="24.7.17">
   <diagram id="user-flow" name="User Flow">
-    <mxGraphModel dx="1240" dy="720" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="2" value="Open mobile page" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff5f6;strokeColor=#ff2442;fontColor=#1f2329;" vertex="1" parent="1">
-          <mxGeometry x="40" y="100" width="140" height="60" as="geometry"/>
+
+        <mxCell id="2" value="Open on phone" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fillColor=#fff5f6;strokeColor=#ff2442;fontColor=#1f2329;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="110" width="150" height="64" as="geometry"/>
         </mxCell>
-        <mxCell id="3" value="Paste public link or share text" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d9dce2;" vertex="1" parent="1">
-          <mxGeometry x="230" y="100" width="180" height="60" as="geometry"/>
+        <mxCell id="3" value="Paste public link&#xa;or share text" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fillColor=#ffffff;strokeColor=#d9dce2;fontColor=#1f2329;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="230" y="110" width="210" height="64" as="geometry"/>
         </mxCell>
-        <mxCell id="4" value="Tap Fetch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ff2442;strokeColor=#ff2442;fontColor=#ffffff;" vertex="1" parent="1">
-          <mxGeometry x="460" y="100" width="120" height="60" as="geometry"/>
+        <mxCell id="4" value="Tap capture" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fillColor=#ff2442;strokeColor=#ff2442;fontColor=#ffffff;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="110" width="120" height="64" as="geometry"/>
         </mxCell>
-        <mxCell id="5" value="POST /api/capture" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff1f4;strokeColor=#ff8ca0;" vertex="1" parent="1">
-          <mxGeometry x="630" y="100" width="150" height="60" as="geometry"/>
+        <mxCell id="5" value="POST /api/capture" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fillColor=#fff1f4;strokeColor=#ff8ca0;fontColor=#1f2329;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="660" y="110" width="170" height="64" as="geometry"/>
         </mxCell>
-        <mxCell id="6" value="Parse public note state" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d9dce2;" vertex="1" parent="1">
-          <mxGeometry x="830" y="100" width="170" height="60" as="geometry"/>
+        <mxCell id="6" value="Validate input&#xa;extract public URL" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fillColor=#ffffff;strokeColor=#d9dce2;fontColor=#1f2329;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="880" y="110" width="190" height="64" as="geometry"/>
         </mxCell>
-        <mxCell id="7" value="Render title, caption, tags, stats, media" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d9dce2;" vertex="1" parent="1">
-          <mxGeometry x="1050" y="100" width="210" height="60" as="geometry"/>
+        <mxCell id="7" value="Fetch public page" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fillColor=#ffffff;strokeColor=#d9dce2;fontColor=#1f2329;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="110" width="160" height="64" as="geometry"/>
         </mxCell>
-        <mxCell id="8" value="Save one item or save all" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff5f6;strokeColor=#ff2442;" vertex="1" parent="1">
-          <mxGeometry x="1310" y="100" width="170" height="60" as="geometry"/>
+        <mxCell id="8" value="Parse and normalize&#xa;note state" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fillColor=#ffffff;strokeColor=#d9dce2;fontColor=#1f2329;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="880" y="250" width="210" height="84" as="geometry"/>
         </mxCell>
-        <mxCell id="9" value="Refresh page = clear current result" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f7f8fa;strokeColor=#cfd4dc;fontColor=#616977;" vertex="1" parent="1">
-          <mxGeometry x="1310" y="230" width="170" height="60" as="geometry"/>
+        <mxCell id="9" value="Render clean result&#xa;title, caption, tags, stats, media" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fillColor=#fff5f6;strokeColor=#ff2442;fontColor=#1f2329;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="240" width="250" height="94" as="geometry"/>
         </mxCell>
-        <mxCell id="10" edge="1" parent="1" source="2" target="3" style="endArrow=block;rounded=0;strokeColor=#ff8ca0;">
+        <mxCell id="10" value="GET /api/media&#xa;same-origin preview + download" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fillColor=#fff1f4;strokeColor=#ff8ca0;fontColor=#1f2329;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="880" y="410" width="250" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="11" value="Open original&#xa;save one&#xa;save all&#xa;reload preview" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fillColor=#ffffff;strokeColor=#d9dce2;fontColor=#1f2329;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="410" width="220" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="12" value="Refresh clears&#xa;the current result" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;spacing=10;fillColor=#f7f8fa;strokeColor=#cfd4dc;fontColor=#616977;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="870" y="560" width="230" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="20" edge="1" parent="1" source="2" target="3" style="endArrow=block;rounded=0;strokeColor=#ff8ca0;edgeStyle=orthogonalEdgeStyle;">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="11" edge="1" parent="1" source="3" target="4" style="endArrow=block;rounded=0;strokeColor=#ff8ca0;">
+        <mxCell id="21" edge="1" parent="1" source="3" target="4" style="endArrow=block;rounded=0;strokeColor=#ff8ca0;edgeStyle=orthogonalEdgeStyle;">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="12" edge="1" parent="1" source="4" target="5" style="endArrow=block;rounded=0;strokeColor=#ff8ca0;">
+        <mxCell id="22" edge="1" parent="1" source="4" target="5" style="endArrow=block;rounded=0;strokeColor=#ff8ca0;edgeStyle=orthogonalEdgeStyle;">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="13" edge="1" parent="1" source="5" target="6" style="endArrow=block;rounded=0;strokeColor=#ff8ca0;">
+        <mxCell id="23" edge="1" parent="1" source="5" target="6" style="endArrow=block;rounded=0;strokeColor=#ff8ca0;edgeStyle=orthogonalEdgeStyle;">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="14" edge="1" parent="1" source="6" target="7" style="endArrow=block;rounded=0;strokeColor=#ff8ca0;">
+        <mxCell id="24" edge="1" parent="1" source="6" target="7" style="endArrow=block;rounded=0;strokeColor=#ff8ca0;edgeStyle=orthogonalEdgeStyle;">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="15" edge="1" parent="1" source="7" target="8" style="endArrow=block;rounded=0;strokeColor=#ff8ca0;">
+        <mxCell id="25" edge="1" parent="1" source="7" target="8" style="endArrow=block;rounded=0;strokeColor=#ff8ca0;edgeStyle=orthogonalEdgeStyle;">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="16" edge="1" parent="1" source="8" target="9" style="endArrow=block;rounded=0;strokeColor=#cfd4dc;dashed=1;">
+        <mxCell id="26" edge="1" parent="1" source="8" target="9" style="endArrow=block;rounded=0;strokeColor=#ff8ca0;edgeStyle=orthogonalEdgeStyle;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="27" edge="1" parent="1" source="9" target="10" style="endArrow=block;rounded=0;strokeColor=#ff8ca0;edgeStyle=orthogonalEdgeStyle;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="28" edge="1" parent="1" source="10" target="11" style="endArrow=block;rounded=0;strokeColor=#ff8ca0;edgeStyle=orthogonalEdgeStyle;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="29" edge="1" parent="1" source="11" target="12" style="endArrow=block;rounded=0;dashed=1;strokeColor=#cfd4dc;edgeStyle=orthogonalEdgeStyle;">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
       </root>

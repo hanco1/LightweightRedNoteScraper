@@ -1,42 +1,66 @@
 # Lightweight RedNote Scraper
 
-[English](./README.md) · [简体中文](./README.zh-CN.md)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-181717?logo=github)](https://github.com/hanco1/LightweightRedNoteScraper)
+[![Issues](https://img.shields.io/github/issues/hanco1/LightweightRedNoteScraper?color=2ea44f&label=Issues)](https://github.com/hanco1/LightweightRedNoteScraper/issues)
+[![Vercel Live](https://img.shields.io/badge/Live-Vercel-000000?logo=vercel)](https://vercel-iphone-mvp.vercel.app)
+[![文档](https://img.shields.io/badge/Docs-流程图%20%26%20架构图-6f42c1)](./docs)
 
-一个轻量、面向手机访问的小红书公开笔记抓取工具。
+[English](./README.md) · [在线访问](https://vercel-iphone-mvp.vercel.app) · [用户流程](./docs/user-flow.zh-CN.md) · [架构说明](./docs/architecture.zh-CN.md)
 
-贴入一条公开链接，就可以读取正文、标签、图片、视频和 Live Photo 动态资源，并直接在手机浏览器里保存需要的内容。无广告、无账号登录、无 cookies、无服务端历史记录。
+一个轻量、面向手机访问的小红书 / RedNote 公开笔记抓取工具。贴入一条公开链接，就可以读取正文、标签、图片、视频和 Live Photo 动态资源，并直接在手机浏览器里保存需要的内容。无广告、无账号登录、无 cookies、无服务端历史记录。
 
-## 为什么做这个项目
+## 页面预览
 
-- 轻量：没有数据库、没有登录流程、没有厚重后台
-- 快：一次只抓一条公开笔记，结果立刻返回
-- 手机优先：界面围绕 iPhone 等移动浏览器设计
-- 干净：没有广告、没有跟踪弹层、没有多余设置
+### 中文移动端界面
 
-## 功能亮点
+![中文手机预览](./docs/images/mobile-home-zh.png)
 
-- 支持公开的小红书 / RedNote 笔记
-- 手机网页可直接使用，支持中英文切换
-- 不需要账号，也不保存 cookies 或任何账号信息
-- 不保留服务端历史记录，刷新页面后当前结果即清空
+### 英文移动端界面
+
+![英文手机预览](./docs/images/mobile-home-en.png)
+
+## 它能做什么
+
+- 一次抓取一条公开的小红书 / RedNote 笔记
+- 提取标题、正文、标签、发布时间、IP 归属地和互动数据
+- 支持图片、视频和 Live Photo 动态资源
+- 提供中英文双语手机网页界面
 - 支持单个媒体保存，也支持一键保存全部媒体
-- 图片与视频通过同域代理预览和下载，兼容性更稳
+
+## 为什么它很轻量
+
+- 不需要数据库
+- 不需要登录流程
+- 不保存账号状态
+- 不保存 cookies
+- 不保留服务端历史记录
+- 没有广告和厚重后台
+- 围绕手机浏览器做了快速单链接流程
 
 ## 功能边界
 
 - 仅支持公开笔记
 - 不抓评论
-- 不登录账号
-- 不做批量任务
-- 不保存服务端历史
+- 不抓登录后私有数据
+- 不做服务端永久存储
+- 托管版不提供本地文件夹选择器
+
+## 工作流程
+
+1. 粘贴一条公开的小红书 / RedNote 链接，或者分享文案。
+2. 页面将输入发送到 `POST /api/capture`。
+3. 服务端请求公开页面并提取 `window.__INITIAL_STATE__`。
+4. 结果被整理成统一结构，返回标题、正文、标签、互动数据和媒体列表。
+5. 图片与视频通过同域 `/api/media` 代理进行预览与下载。
 
 ## 技术栈
 
-- 前端：原生 `HTML + CSS + JavaScript`
-- 后端：Vercel Serverless Functions（Node.js）
-- 解析：从公开页面提取 `window.__INITIAL_STATE__`
-- 预览与下载：同域媒体代理 `/api/media`
-- 持久化：无数据库、无服务端长期存储
+- 前端：原生 HTML、CSS、JavaScript
+- 接口：Vercel Node.js Functions
+- 解析：Node.js + `vm` 读取公开页面状态
+- 媒体传输：同域代理接口 `/api/media`
+- 测试：Node 内置测试运行器
+- 部署：Vercel
 
 ## 目录结构
 
@@ -50,9 +74,8 @@
 │  ├─ architecture.zh-CN.md
 │  ├─ user-flow.md
 │  ├─ user-flow.zh-CN.md
+│  ├─ images/
 │  └─ diagrams/
-│     ├─ architecture.drawio
-│     └─ user-flow.drawio
 ├─ iphone/
 │  └─ index.html
 ├─ lib/
@@ -75,8 +98,6 @@
 
 - Node.js 20+
 
-安装与启动：
-
 ```bash
 npm install
 npm test
@@ -90,8 +111,6 @@ npm run dev
 ## 部署到 Vercel
 
 ```bash
-npm install
-npm test
 vercel
 vercel --prod
 ```
@@ -106,8 +125,7 @@ vercel --prod
 - 用户流程图：[`docs/diagrams/user-flow.drawio`](./docs/diagrams/user-flow.drawio)
 - 架构图：[`docs/diagrams/architecture.drawio`](./docs/diagrams/architecture.drawio)
 
-## 安全与隐私
+## 免责声明
 
-本项目不保存账号 cookies，也不在服务端永久存储抓取内容。
-
-它只在你发起请求时临时抓取公开页面，并将结果返回给当前会话。
+内容版权归平台及原作者所有。  
+本项目不保存账号 cookies，也不会在服务端永久存储抓取到的内容。

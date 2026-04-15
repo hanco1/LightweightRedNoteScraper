@@ -1,32 +1,30 @@
 # User Flow
 
-## Primary user journey
+This app is a mobile-first RedNote/Xiaohongshu saver for public posts. The goal is simple: paste one public link, capture it once, and keep the result easy to read and easy to save.
 
-1. Open the mobile page in Safari, Chrome, or any phone browser.
-2. Paste a public RedNote/Xiaohongshu link or share text.
-3. Tap the primary action button.
-4. The frontend sends the link to `POST /api/capture`.
-5. The API extracts the public URL, fetches the public page, parses the embedded note state, and normalizes the response.
-6. The page renders:
+## Primary journey
+
+1. Open the app in a phone browser.
+2. Paste a public RedNote/Xiaohongshu link, or share text that contains one.
+3. Tap the main capture button.
+4. The frontend sends `POST /api/capture` with the pasted value.
+5. The API validates the request, extracts the public URL, fetches the public page, parses the embedded note state, and normalizes the payload.
+6. The page renders the cleaned result:
    - title
-   - cleaned caption
-   - tags
+   - caption with tags removed
+   - author
    - publish time
-   - IP location if available
-   - interactions
-   - media cards
-7. The user can:
-   - open the original post
-   - save one item
-   - save all media
-   - reload previews if one image fails to paint
-8. Refreshing the page clears the current result.
+   - IP location when present
+   - likes, saves, comments, and shares
+   - image, video, and live-photo media cards
+7. Media previews and downloads use the same-origin proxy at `/api/media`, which keeps playback and saving more reliable on mobile browsers, including Safari.
+8. The user can open the original post, save one item, save everything, or reload a preview that failed to paint.
+9. Refreshing the page clears the current result. Nothing is kept in server history.
 
-## Why this flow is lightweight
+## Why this flow stays lightweight
 
-- One screen
-- One request to capture
-- No login
-- No cookies
-- No stored history
-- No extra admin surface
+- One screen, one capture path
+- No login or cookies
+- No database and no server-side history
+- No background jobs or admin surface
+- Same-origin media proxy only when media needs to be previewed or saved

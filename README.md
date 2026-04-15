@@ -1,26 +1,41 @@
 # Lightweight RedNote Scraper
 
-[English](./README.md) · [简体中文](./README.zh-CN.md)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-181717?logo=github)](https://github.com/hanco1/LightweightRedNoteScraper)
+[![Issues](https://img.shields.io/github/issues/hanco1/LightweightRedNoteScraper?color=2ea44f&label=Issues)](https://github.com/hanco1/LightweightRedNoteScraper/issues)
+[![Vercel Live](https://img.shields.io/badge/Live-Vercel-000000?logo=vercel)](https://vercel-iphone-mvp.vercel.app)
+[![Docs](https://img.shields.io/badge/Docs-User%20Flow%20%26%20Architecture-6f42c1)](./docs)
 
-A lightweight, mobile-first RedNote (Xiaohongshu) scraper for public posts.
+[Run locally](#run-locally) · [Live app](https://vercel-iphone-mvp.vercel.app) · [Chinese README](./README.zh-CN.md) · [User flow](./docs/user-flow.md) · [Architecture](./docs/architecture.md)
 
-Paste one public link, fetch the caption, tags, photos, videos, and Live Photo motion files, then save what you want directly from your phone. No ads, no account login, no cookies, and no server-side history.
+A lightweight, mobile-first RedNote/Xiaohongshu scraper for public posts. Paste one public link, read the caption, tags, photos, videos, and Live Photo motion files, then save what you need directly from your phone. No ads, no account login, no cookies, no server-side history.
 
-## Why this project exists
+## Preview
 
-- Lightweight: no database, no login flow, no heavy dashboard
-- Fast: fetches a single public post and renders the result immediately
-- Mobile-first: optimized for phone browsers and quick save actions
-- Clean: no ads, no tracking UI, no unnecessary setup for end users
+### Chinese mobile view
 
-## Highlights
+![Chinese mobile preview](./docs/images/mobile-home-zh.png)
 
-- Works with public RedNote/Xiaohongshu posts
-- Mobile web UI with Chinese and English language switch
-- No cookies and no account credentials required
-- No server-side history; refreshing the page clears the current session
-- Save individual items or save all media in one pass
-- Media preview and download are proxied through the same domain for better browser compatibility
+### English mobile view
+
+![English mobile preview](./docs/images/mobile-home-en.png)
+
+## What it does
+
+- Captures one public RedNote/Xiaohongshu post at a time
+- Extracts title, caption, tags, publish time, IP location, and interaction counts
+- Supports images, videos, and Live Photo motion files
+- Provides a mobile-first bilingual interface in Chinese and English
+- Lets users save one media item or save all media in one pass
+
+## Why it feels lightweight
+
+- No database
+- No login flow
+- No account state
+- No cookies
+- No server-side history
+- No ads or dashboard clutter
+- Fast single-link flow tuned for mobile browsers
 
 ## Product boundaries
 
@@ -29,6 +44,14 @@ Paste one public link, fetch the caption, tags, photos, videos, and Live Photo m
 - No login-based data
 - No permanent server-side storage
 - No local folder picker in the hosted mobile version
+
+## How it works
+
+1. Paste a public Xiaohongshu / RedNote link or raw share text.
+2. The page sends the input to `POST /api/capture`.
+3. The server fetches the public page and extracts `window.__INITIAL_STATE__`.
+4. The response is normalized into one payload with metadata and media.
+5. Media is previewed and downloaded through the same-origin `/api/media` proxy.
 
 ## Tech stack
 
@@ -44,28 +67,40 @@ Paste one public link, fetch the caption, tags, photos, videos, and Live Photo m
 ```text
 .
 ├─ api/
-│  ├─ capture.js        # Stateless public-post capture endpoint
-│  └─ media.js          # Same-origin media proxy for preview/download
+│  ├─ capture.js
+│  └─ media.js
+├─ docs/
+│  ├─ architecture.md
+│  ├─ architecture.zh-CN.md
+│  ├─ user-flow.md
+│  ├─ user-flow.zh-CN.md
+│  ├─ images/
+│  └─ diagrams/
 ├─ iphone/
-│  └─ index.html        # Optional secondary mobile entry
+│  └─ index.html
 ├─ lib/
-│  ├─ i18n.js           # UI copy for Chinese and English
-│  └─ xhs.js            # Public link parsing and payload normalization
+│  ├─ i18n.js
+│  └─ xhs.js
 ├─ tests/
 │  ├─ i18n.test.js
 │  ├─ media.test.js
 │  └─ xhs.test.js
-├─ app.js               # Mobile page behavior
-├─ styles.css           # Mobile-first UI styling
-├─ index.html           # Main mobile entry
-├─ dev-server.mjs       # Local dev server
-└─ vercel.json          # Vercel config
+├─ app.js
+├─ dev-server.mjs
+├─ index.html
+├─ styles.css
+└─ vercel.json
 ```
 
-## Local development
+## Run locally
+
+Requirements:
+
+- Node.js 20+
 
 ```bash
 npm install
+npm test
 npm run dev
 ```
 
@@ -73,23 +108,18 @@ Then open [http://127.0.0.1:3015](http://127.0.0.1:3015).
 
 ## Deploy to Vercel
 
-This repository is designed to work well on Vercel.
-
 ```bash
 vercel
-```
-
-Deploy a preview first, review it on mobile, then promote when ready:
-
-```bash
-vercel deploy --prod
+vercel --prod
 ```
 
 ## Documentation
 
 - Chinese README: [README.zh-CN.md](./README.zh-CN.md)
 - User flow: [docs/user-flow.md](./docs/user-flow.md)
+- User flow (Chinese): [docs/user-flow.zh-CN.md](./docs/user-flow.zh-CN.md)
 - Architecture: [docs/architecture.md](./docs/architecture.md)
+- Architecture (Chinese): [docs/architecture.zh-CN.md](./docs/architecture.zh-CN.md)
 - Draw.io user flow: [docs/diagrams/user-flow.drawio](./docs/diagrams/user-flow.drawio)
 - Draw.io architecture: [docs/diagrams/architecture.drawio](./docs/diagrams/architecture.drawio)
 
