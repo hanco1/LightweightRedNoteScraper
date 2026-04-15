@@ -5,7 +5,7 @@
 [![Vercel Live](https://img.shields.io/badge/Live-Vercel-000000?logo=vercel)](https://vercel-lightweightrednotescraper.vercel.app/)
 [![Docs](https://img.shields.io/badge/Docs-User%20Flow%20%26%20Architecture-6f42c1)](./docs)
 
-[Run locally](#run-locally) · [Live app](https://vercel-iphone-mvp.vercel.app) · [Chinese README](./README.zh-CN.md) · [User flow](./docs/user-flow.md) · [Architecture](./docs/architecture.md)
+[Run locally](#run-locally) · [Live app](https://vercel-lightweightrednotescraper.vercel.app/) · [Chinese README](./README.zh-CN.md) · [User flow](./docs/user-flow.md) · [Architecture](./docs/architecture.md)
 
 A lightweight, mobile-first RedNote/Xiaohongshu scraper for public posts. Paste one public link, read the caption, tags, photos, videos, and Live Photo motion files, then save what you need directly from your phone. No ads, no account login, no cookies, no server-side history.
 
