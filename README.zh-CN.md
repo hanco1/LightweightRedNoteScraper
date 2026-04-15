@@ -117,13 +117,25 @@ vercel --prod
 
 ## 文档
 
+### 图示预览
+
+#### 用户流程图
+
+![用户流程图预览](./docs/diagrams/user-flow.svg)
+
+#### 架构图
+
+![架构图预览](./docs/diagrams/architecture.svg)
+
 - 英文 README：[`README.md`](./README.md)
 - 用户流程（英文）：[`docs/user-flow.md`](./docs/user-flow.md)
 - 用户流程（中文）：[`docs/user-flow.zh-CN.md`](./docs/user-flow.zh-CN.md)
 - 架构说明（英文）：[`docs/architecture.md`](./docs/architecture.md)
 - 架构说明（中文）：[`docs/architecture.zh-CN.md`](./docs/architecture.zh-CN.md)
 - 用户流程图：[`docs/diagrams/user-flow.drawio`](./docs/diagrams/user-flow.drawio)
+- 渲染后的用户流程图：[`docs/diagrams/user-flow.svg`](./docs/diagrams/user-flow.svg)
 - 架构图：[`docs/diagrams/architecture.drawio`](./docs/diagrams/architecture.drawio)
+- 渲染后的架构图：[`docs/diagrams/architecture.svg`](./docs/diagrams/architecture.svg)
 
 ## 免责声明
 

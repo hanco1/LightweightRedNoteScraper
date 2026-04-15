@@ -5,6 +5,7 @@
   "description": "Lightweight mobile-first RedNote/Xiaohongshu scraper for public posts.",
   "scripts": {
     "test": "node --test tests/*.test.js",
-    "dev": "node dev-server.mjs"
+    "dev": "node dev-server.mjs",
+    "export:diagrams": "node scripts/render-drawio-svg.mjs"
   }
 }

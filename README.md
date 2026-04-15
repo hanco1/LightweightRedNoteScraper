@@ -115,13 +115,25 @@ vercel --prod
 
 ## Documentation
 
+### Diagram previews
+
+#### User flow
+
+![Rendered user flow](./docs/diagrams/user-flow.svg)
+
+#### Architecture
+
+![Rendered architecture](./docs/diagrams/architecture.svg)
+
 - Chinese README: [README.zh-CN.md](./README.zh-CN.md)
 - User flow: [docs/user-flow.md](./docs/user-flow.md)
 - User flow (Chinese): [docs/user-flow.zh-CN.md](./docs/user-flow.zh-CN.md)
 - Architecture: [docs/architecture.md](./docs/architecture.md)
 - Architecture (Chinese): [docs/architecture.zh-CN.md](./docs/architecture.zh-CN.md)
 - Draw.io user flow: [docs/diagrams/user-flow.drawio](./docs/diagrams/user-flow.drawio)
+- Rendered user flow: [docs/diagrams/user-flow.svg](./docs/diagrams/user-flow.svg)
 - Draw.io architecture: [docs/diagrams/architecture.drawio](./docs/diagrams/architecture.drawio)
+- Rendered architecture: [docs/diagrams/architecture.svg](./docs/diagrams/architecture.svg)
 
 ## Disclaimer
 
