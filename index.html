@@ -1,56 +1,67 @@
 <!doctype html>
-<html lang="zh-CN" data-ui-language="zh">
+<html lang="en" data-ui-language="zh">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>小红书一键存图</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23ff2442'/%3E%3Cpath d='M19 20h26v6H19zm0 11h19v6H19zm0 11h26v6H19z' fill='white'/%3E%3C/svg%3E" />
+    <title>RedNote Saver</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23ff2442'/%3E%3Cpath d='M19 20h26v6H19zm0 11h19v6H19zm0 11h26v6H19z' fill='white'/%3E%3C/svg%3E"
+    />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <main class="phone-app">
       <section class="hero">
         <div class="hero-top">
-          <p class="eyebrow" data-i18n="heroEyebrow">小红书图文保存</p>
+          <p class="eyebrow" data-i18n="heroEyebrow">RedNote Saver</p>
           <div id="languageSwitch" class="lang-switch" role="group" aria-label="Language">
             <button type="button" class="lang-option is-active" data-lang="zh" aria-pressed="true">
-              中文
+              ZH
             </button>
             <button type="button" class="lang-option" data-lang="en" aria-pressed="false">EN</button>
           </div>
         </div>
         <p class="hero-copy" data-i18n="heroCopy">
-          支持所有小红书公开笔记。整理完就能看正文、标签和图片视频，想存哪张就点哪张，无水印。
+          Works with public RedNote posts on Xiaohongshu. In one pass you can read the caption,
+          tags, photos, and videos. Save any item you want without a watermark.
         </p>
       </section>
 
       <section class="capture-panel">
         <label class="field">
-          <span class="field-label" data-i18n="fieldLabel">贴小红书链接</span>
+          <span class="field-label" data-i18n="fieldLabel">Paste a RedNote link</span>
           <textarea
             id="sourceInput"
             rows="4"
             data-i18n-placeholder="sourcePlaceholder"
-            placeholder="把小红书链接或分享文案贴到这里"
+            placeholder="Paste a public RedNote or Xiaohongshu link here"
           ></textarea>
         </label>
         <div class="button-stack">
-          <button id="captureButton" class="primary-button" data-i18n="captureButton">开始整理</button>
+          <button id="captureButton" class="primary-button" data-i18n="captureButton">Fetch now</button>
           <button id="saveAllButton" class="secondary-button" type="button" disabled>
-            保存所有图片
+            Save all images
           </button>
         </div>
-        <p id="statusText" class="status-text">当前只看这一条，刷新页面会重新开始。</p>
+        <p id="statusText" class="status-text">Only the current result stays on this page. Refresh to start over.</p>
       </section>
 
       <section id="resultSection" class="result-shell is-empty">
         <div class="result-head">
           <div>
-            <p class="section-label" data-i18n="resultLabel">当前内容</p>
-            <h2 id="resultTitle">还没有内容</h2>
+            <p class="section-label" data-i18n="resultLabel">Current post</p>
+            <h2 id="resultTitle">Nothing here yet</h2>
           </div>
           <div class="result-actions">
-            <a id="sourceLink" class="ghost-link hidden" target="_blank" rel="noreferrer" data-i18n="sourceLink">去原帖</a>
+            <a
+              id="sourceLink"
+              class="ghost-link hidden"
+              target="_blank"
+              rel="noreferrer"
+              data-i18n="sourceLink"
+              >Open original</a
+            >
           </div>
         </div>
 
@@ -61,43 +72,52 @@
 
         <div id="statsGrid" class="stats-grid hidden">
           <article class="stat-block">
-            <span class="stat-label" data-i18n="authorLabel">博主</span>
-            <strong id="authorValue">—</strong>
+            <span class="stat-label" data-i18n="authorLabel">Creator</span>
+            <strong id="authorValue">--</strong>
           </article>
           <article class="stat-block">
-            <span class="stat-label" data-i18n="likeLabel">点赞</span>
-            <strong id="likeValue">—</strong>
+            <span class="stat-label" data-i18n="likeLabel">Likes</span>
+            <strong id="likeValue">--</strong>
           </article>
           <article class="stat-block">
-            <span class="stat-label" data-i18n="collectLabel">收藏</span>
-            <strong id="collectValue">—</strong>
+            <span class="stat-label" data-i18n="collectLabel">Saves</span>
+            <strong id="collectValue">--</strong>
           </article>
           <article class="stat-block">
-            <span class="stat-label" data-i18n="commentLabel">评论</span>
-            <strong id="commentValue">—</strong>
+            <span class="stat-label" data-i18n="commentLabel">Comments</span>
+            <strong id="commentValue">--</strong>
           </article>
           <article class="stat-block">
-            <span class="stat-label" data-i18n="shareLabel">分享</span>
-            <strong id="shareValue">—</strong>
+            <span class="stat-label" data-i18n="shareLabel">Shares</span>
+            <strong id="shareValue">--</strong>
           </article>
         </div>
 
         <section class="detail-block">
-          <p class="section-label" data-i18n="descriptionLabel">正文</p>
-          <div id="descriptionValue" class="description">整理完成后，这里会显示去掉标签后的正文。</div>
+          <p class="section-label" data-i18n="descriptionLabel">Caption</p>
+          <div id="descriptionValue" class="description">
+            Once the post is ready, the cleaned caption will appear here.
+          </div>
         </section>
 
         <section id="tagsSection" class="detail-block hidden">
-          <p class="section-label" data-i18n="tagsLabel">标签</p>
+          <p class="section-label" data-i18n="tagsLabel">Tags</p>
           <div id="tagsValue" class="tag-list"></div>
         </section>
 
         <section id="mediaSection" class="detail-block hidden">
           <div class="section-head">
-          <p class="section-label" data-i18n="mediaLabel">媒体</p>
+            <p class="section-label" data-i18n="mediaLabel">Media</p>
             <div class="section-tools">
               <span id="mediaCount" class="section-count"></span>
-              <button id="refreshMediaButton" class="text-button hidden" type="button" data-i18n="refreshMedia">重试预览</button>
+              <button
+                id="refreshMediaButton"
+                class="text-button hidden"
+                type="button"
+                data-i18n="refreshMedia"
+              >
+                Reload previews
+              </button>
             </div>
           </div>
           <div id="mediaGrid" class="media-grid"></div>
@@ -105,7 +125,8 @@
       </section>
 
       <footer class="legal-note" data-i18n="legalNote">
-        免责声明：版权归平台及作者所有，本程序不储存任何内容。
+        Disclaimer: All rights belong to the platform and the original creator. This tool does not
+        store any content.
       </footer>
     </main>
 

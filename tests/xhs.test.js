@@ -14,7 +14,7 @@ const {
 
 test("extractPublicUrl finds a Xiaohongshu url inside share text", () => {
   const input =
-    "21 【Sample title - Demo Author | Xiaohongshu】 token https://www.xiaohongshu.com/discovery/item/69d4daac000000001a02b9be?source=webshare&xsec_token=abc";
+    "21 [Sample title - Demo Author | Xiaohongshu] token https://www.xiaohongshu.com/discovery/item/69d4daac000000001a02b9be?source=webshare&xsec_token=abc";
 
   assert.equal(
     extractPublicUrl(input),
@@ -24,8 +24,8 @@ test("extractPublicUrl finds a Xiaohongshu url inside share text", () => {
 
 test("splitDescriptionAndTags separates text and hashtags", () => {
   const result = splitDescriptionAndTags(
-    "First line of body\n#VancouverFood[话题]# #HotPotTonight#",
-    [{ name: "VancouverFood[话题]" }],
+    "First line of body\n#VancouverFood[\u8bdd\u9898]# #HotPotTonight#",
+    [{ name: "VancouverFood[\u8bdd\u9898]" }],
   );
 
   assert.equal(result.description, "First line of body");
@@ -97,6 +97,13 @@ test("extractStateBlob and parseInitialState support JS object state blobs", () 
   );
 });
 
+test("parseInitialState rejects executable syntax", () => {
+  assert.throws(
+    () => parseInitialState('({ note: { noteDetailMap: { demo: { note: (() => ({ title: "bad" }))() } } } })'),
+    /Unsupported note state syntax|Failed to parse note state/,
+  );
+});
+
 test("normalizeCapturePayload preserves live photo positional motion urls", () => {
   const state = {
     note: {
@@ -153,10 +160,7 @@ test("validateProxyTarget only allows Xiaohongshu media hosts", () => {
     validateProxyTarget("http://sns-webpic-qc.xhscdn.com/demo.jpg"),
     "https://sns-webpic-qc.xhscdn.com/demo.jpg",
   );
-  assert.equal(
-    validateProxyTarget("https://www.xiaohongshu.com/explore/demo"),
-    "https://www.xiaohongshu.com/explore/demo",
-  );
+  assert.equal(validateProxyTarget("https://www.xiaohongshu.com/explore/demo"), null);
   assert.equal(validateProxyTarget("https://evil.example/demo.jpg"), null);
 });
 

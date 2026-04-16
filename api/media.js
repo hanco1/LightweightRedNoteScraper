@@ -22,11 +22,19 @@ module.exports = async function handler(req, res) {
     upstreamHeaders.range = req.headers.range;
   }
 
-  const upstream = await fetch(target, {
-    method: "GET",
-    headers: upstreamHeaders,
-    redirect: "follow",
-  });
+  let upstream;
+  try {
+    upstream = await fetch(target, {
+      method: "GET",
+      headers: upstreamHeaders,
+      redirect: "follow",
+    });
+  } catch {
+    res.statusCode = 502;
+    res.setHeader("Content-Type", "application/json; charset=utf-8");
+    res.end(JSON.stringify({ error: "Media request failed." }));
+    return;
+  }
 
   if (!upstream.ok || !upstream.body) {
     res.statusCode = upstream.status || 502;

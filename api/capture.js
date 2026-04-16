@@ -1,20 +1,46 @@
 const { fetchCaptureFromPublicLink } = require("../lib/xhs");
 
+const MAX_BODY_BYTES = 1024 * 1024;
+
+function createHttpError(statusCode, message) {
+  const error = new Error(message);
+  error.statusCode = statusCode;
+  return error;
+}
+
 async function readJsonBody(req) {
   if (req.body && typeof req.body === "object") {
     return req.body;
   }
 
+  if (typeof req.body === "string" && req.body.trim()) {
+    try {
+      return JSON.parse(req.body);
+    } catch {
+      throw createHttpError(400, "Invalid JSON payload.");
+    }
+  }
+
   const chunks = [];
+  let totalBytes = 0;
   for await (const chunk of req) {
-    chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+    const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+    totalBytes += buffer.length;
+    if (totalBytes > MAX_BODY_BYTES) {
+      throw createHttpError(413, "Request body is too large.");
+    }
+    chunks.push(buffer);
   }
 
   if (!chunks.length) {
     return {};
   }
 
-  return JSON.parse(Buffer.concat(chunks).toString("utf8"));
+  try {
+    return JSON.parse(Buffer.concat(chunks).toString("utf8"));
+  } catch {
+    throw createHttpError(400, "Invalid JSON payload.");
+  }
 }
 
 module.exports = async function handler(req, res) {
@@ -44,7 +70,10 @@ module.exports = async function handler(req, res) {
     res.setHeader("Content-Type", "application/json; charset=utf-8");
     res.end(JSON.stringify(payload));
   } catch (error) {
-    res.statusCode = 500;
+    res.statusCode =
+      error && typeof error === "object" && Number.isInteger(error.statusCode)
+        ? error.statusCode
+        : 500;
     res.setHeader("Content-Type", "application/json; charset=utf-8");
     res.end(
       JSON.stringify({
